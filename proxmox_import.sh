@@ -1,12 +1,15 @@
 #!/bin/bash
 
 directory="/mnt/vmware/"
+vmware_user="andre"
+vmware_ip="10.80.67.2"
+vmware_store="/vmfs/volumes/datastore1/"
 VM_ID=""
 arquivo=""
 
 mkdir -p $directory
 echo -en "Senha do vmware: "
-sshfs -o ro -oHostKeyAlgorithms=+ssh-rsa andre@10.80.67.2:/vmfs/volumes/datastore1/ $directory
+sshfs -o ro -oHostKeyAlgorithms=+ssh-rsa $vmware_user@$vmware_ip:$vmware_store $directory
 
 # Obter lista de arquivos .vmdk
 options=$(find $directory -name "*.vmdk" | grep -vE -- "-(flat|sesparse|ctk)")
